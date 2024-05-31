@@ -10,6 +10,12 @@ const Index = () => {
     setPosts(storedPosts);
   }, []);
 
+  const handleDeletePost = (index) => {
+    const updatedPosts = posts.filter((_, i) => i !== index);
+    setPosts(updatedPosts);
+    localStorage.setItem("posts", JSON.stringify(updatedPosts));
+  };
+
   return (
     <Container centerContent maxW="container.md" py={8}>
       <VStack spacing={4}>
@@ -30,9 +36,18 @@ const Index = () => {
           Add a new post
         </Link>
         {posts.map((post, index) => (
-          <Box key={index} p={5} shadow="md" borderWidth="1px" width="100%">
+          <Box key={index} p={5} shadow="md" borderWidth="1px" width="100%" position="relative">
             <Heading fontSize="xl">{post.title}</Heading>
             <Text mt={4}>{post.content}</Text>
+            <Button
+              position="absolute"
+              top={2}
+              right={2}
+              colorScheme="red"
+              onClick={() => handleDeletePost(index)}
+            >
+              Delete
+            </Button>
           </Box>
         ))}
       </VStack>
