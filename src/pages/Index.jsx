@@ -1,7 +1,8 @@
-import { Container, Text, VStack, Heading, Box, Image, Link } from "@chakra-ui/react";
+import { Container, Text, VStack, Heading, Box, Image, Link, useColorMode, Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const Index = () => {
+    const { colorMode, toggleColorMode } = useColorMode();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -12,6 +13,9 @@ const Index = () => {
   return (
     <Container centerContent maxW="container.md" py={8}>
       <VStack spacing={4}>
+        <Button onClick={toggleColorMode}>
+          Toggle {colorMode === "light" ? "Dark" : "Light"}
+        </Button>
         <Heading as="h1" size="2xl">Welcome to My Personal Blog</Heading>
         <Box boxSize="sm">
           <Image src="/images/blog-image.jpg" alt="Blog Image" />
